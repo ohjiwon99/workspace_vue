@@ -2,34 +2,10 @@
     <div>
         <div id="wrap">
 
-            <div id="header" class="clearfix">
-                <h1>
-                    <a href="">MySite</a>
-                </h1>
 
-                <!-- 
-                    <ul>
-                        <li>황일영 님 안녕하세요^^</li>
-                        <li><a href="" class="btn_s">로그아웃</a></li>
-                        <li><a href="" class="btn_s">회원정보수정</a></li>
-                    </ul>
-                    -->
-                <ul>
-                    <li><a href="" class="btn_s">로그인</a></li>
-                    <li><a href="" class="btn_s">회원가입</a></li>
-                </ul>
-
-            </div>
+            <AppHeader />
             <!-- //header -->
 
-            <div id="nav">
-                <ul class="clearfix">
-                    <li><a href="">입사지원서</a></li>
-                    <li><a href="">게시판</a></li>
-                    <li><a href="">갤러리</a></li>
-                    <li><a href="">방명록</a></li>
-                </ul>
-            </div>
             <!-- //nav -->
 
             <div id="container" class="clearfix">
@@ -92,10 +68,7 @@
 
             </div>
             <!-- //container  -->
-
-            <div id="footer">
-                Copyright ⓒ 2020 오지원. All right reserved
-            </div>
+            <AppFooter />
             <!-- //footer -->
 
         </div>
@@ -106,11 +79,15 @@
 <script>
 import "@/assets/css/user.css"
 import axios from 'axios';
+import AppFooter from "@/components/AppFooter.vue";
+import AppHeader from "@/components/AppHeader.vue";
 
 export default
     {
         name: "LoginFormView",
-        components: {},
+        components: {
+            AppFooter,AppHeader
+        },
         data() {
             return {
                 userVo: {
@@ -133,23 +110,32 @@ export default
 
                     responseType: 'json' //수신타입
                 }).then(response => {
+                   if (response.data.result == "success") {
+                    
+                   
                     console.log(response); //수신데이타
                     console.log(response.data);//수신데이타 authUser
                     
                     //로그인 사용자 정보
-                    let authUser = response.data;
-                    this.$store.commit("setAuthUser", authUser);
+                    let authUser = response.data.apiData;
+                    
 
                     //token 응답문서의 해더에 있음 
                     //"Authorization, Bearer  + token"
                     const token = response.headers.authorization.split(" ")[1]
-                    
-                    this.$store.commit("settoken", token);
+
+                    //vuex저장
+                    this.$store.commit("setAuthUser", authUser);
+                    this.$store.commit("setToken", token);
 
                     console.log(authUser);
                     console.log(token);
 
                     this.$router.push("/");
+                   }else{
+                    console.log(response.data.message);
+                    alert("아이디 패스워드를 확인하세요")
+                   }
 
                 }).catch(error => {
                     console.log(error);
