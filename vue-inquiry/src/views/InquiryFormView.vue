@@ -76,9 +76,9 @@ export default {
             }
         },
         searchReservation() {
-            // 여기서는 생년월일과 전화번호를 서버로 보내고 예약번호를 받아와서 표시합니다.
-            // 서버에서 받아온 데이터를 reservationNumber에 할당하고 showResult를 true로 설정합니다.
-            // 아래는 예시로 reservationNumber와 showResult를 임시로 설정한 것입니다.
+            // 여기서는 생년월일과 전화번호를 서버로 보내고 예약번호를 받아와서 표시.
+            // 서버에서 받아온 데이터를 reservationNumber에 할당하고 showResult를 true로 설정.
+            // 아래는 예시로 reservationNumber와 showResult를 임시설정.
             this.reservationNumber = '예약번호';
             this.showResult = true;
         }
