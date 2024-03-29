@@ -68,7 +68,7 @@ export default {
                 responseType: 'json' //수신타입
             }).then(response => {
                 console.log(response); //수신데이타
-                this.phonebookList = response.data.apiData;
+                this.phonebookList = response.data.apidata;
             }).catch(error => {
                 console.log(error);
             });
@@ -102,6 +102,3 @@ export default {
     }
 };
 </script>
-
-
-<style></style>

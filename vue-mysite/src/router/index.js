@@ -4,6 +4,12 @@ import LoginFormView from '@/views/user/LoginFormView.vue'
 import ModifyFormView from '@/views/user/ModifyFormView.vue'
 import AttachFormView from '@/views/attach/AttachFormView.vue'
 import AttachResultView from '@/views/attach/AttachResultView.vue'
+import BoardListView from '@/views/board/BoardListView.vue'
+import BoardModifyFormView from '@/views/board/BoardModifyFormView.vue'
+import BoardReadView from '@/views/board/BoardReadView.vue'
+import BoardWriteFormView from '@/views/board/BoardWriteFormView.vue'
+
+
 
 const routes = [
   {
@@ -30,6 +36,26 @@ const routes = [
     path: '/attach/result',
     name: '/result',
     component: AttachResultView
+  },
+  {
+    path: '/board/boardlist',
+    name: '/boardlist',
+    component: BoardListView
+  },
+  {
+    path: '/board/boardmodifyform',
+    name: '/boardmodifyform',
+    component: BoardModifyFormView
+  },
+  {
+    path: '/board/boardread',
+    name: '/boardread',
+    component: BoardReadView
+  },
+  {
+    path: '/board/boardwriteform',
+    name: '/boardwriteform',
+    component: BoardWriteFormView
   }
 
 

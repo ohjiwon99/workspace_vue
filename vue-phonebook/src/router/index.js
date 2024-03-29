@@ -10,8 +10,8 @@ const routes = [
     component: writeFormView
   },
   {
-    path: '/',
-    name: '/',
+    path: '/list',
+    name: '/list',
     component: listView
   },
   {
