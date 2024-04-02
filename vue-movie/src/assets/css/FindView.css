@@ -84,3 +84,60 @@
 #result-table th {
   background-color: #f0f0f0;
 }
+
+.ticket {
+  width: 300px;
+  padding: 20px;
+  background-color: #fff;
+  border: 3px solid  #ff4d4d; /* 테두리 추가 */
+  border-radius: 10px;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.order-number {
+  font-size: 32px;
+  font-weight: bold;
+  color: #000000;
+  padding-top: 10px; 
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+.info {
+  font-size: 20px;
+  color: #000000;
+  border-top: 2px solid #ff4d4d;
+  padding-top: 10px; 
+  text-align: center;
+  padding-bottom: 5px; 
+}
+
+.infoList {
+  font-size: 15px;
+  color: #000000;
+  padding-top: 10px; 
+  text-align: center;
+  padding-bottom: 10px; 
+}
+
+.point {
+  font-size: 15px;
+  color: #000000;
+  border-top: 2px solid #ff4d4d;
+  padding-top: 10px; 
+  text-align: left;
+  padding-bottom: 5px; 
+}
+
+/* 바코드 스타일 */
+.barcode {
+  position: absolute;
+  bottom: 20px; /* 아래 여백 추가 */
+  left: 50%; /* 가운데 정렬 */
+  transform: translateX(-50%); /* 가운데 정렬 */
+  width: 200px; /* 바코드 너비 조정 */
+}

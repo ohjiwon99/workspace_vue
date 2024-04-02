@@ -3,16 +3,45 @@
         <div id="wrap">
             <AppHeader />
             <div id="app">
+                <div class="content" v-if="isModalViewed">
+                    <!-- 예매 내역 조회 창 -->
+                    <form action="" method="" enctype="multipart/form-data">
+
+                        <div class="m-body">
+                            <div id="result">
+                                <table id="result-table">
+                                    <thead>
+                                        <tr>
+                                            <th>예약번호</th>
+                                            <th>영화 제목</th>
+                                            <th>상영일시</th>
+                                            <th>상영관</th>
+                                            <th>좌석</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-bind:key="i" v-for="(userVo, i) in reservationList">
+                                            <td>{{ userVo.mRemarks }}</td>
+                                            <td>{{ userVo.mName }}</td>
+                                            <td>{{ userVo.mDate }}</td>
+                                            <td>{{ userVo.mTheater }}</td>
+                                            <td>{{ userVo.sNo }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+                
                 <div id="input-container">
                     <input type="text" v-model="phoneNumber" placeholder="010-0000-0000">
-                    <!--
-                <input type="text" v-model="dateInput" placeholder="YYYYMMDD">
-            -->
-                    <ModalView v-if="isModalViewed" @close-modal="isModalViewed = false">
-                        <FindContentView></FindContentView>
-                    </ModalView>
-                    <button id="search-button" @click="isModalViewed=true">핸드폰번호조회</button>
+                    <button id="search-button" @click="goToFind">핸드폰번호조회</button>
                 </div>
+
+
 
                 <div class="dial-container">
                     <div class="dial-button" @click="appendNumber(1)">1</div>
@@ -35,6 +64,11 @@
                 <div>
                     <router-link to="/" id="return-button">돌아가기</router-link>
                 </div>
+
+
+
+
+
             </div>
             <AppFooter />
         </div>
@@ -45,44 +79,41 @@
 import "@/assets/css/FindView.css";
 import AppHeader from "@/components/AppHeader.vue"
 import AppFooter from "@/components/AppFooter.vue"
-import ModalView from "@/components/ModalView.vue";
-import FindContentView from "@/components/FindContentView.vue";
 import axios from 'axios';
+/* import ModalView from "@/components/ModalView.vue";
+import FindContentView from "@/components/FindContentView.vue";*/
+
 
 export default {
     name: "FindView",
     components: {
         AppHeader,
         AppFooter,
-        ModalView,
-        FindContentView,
+        /*ModalView,
+        FindContentView*/
     },
     data() {
         return {
             isModalViewed: false,
             phoneNumber: '',
             dateInput: '',
-            reservationNumber: '',
+            reservationList: [] // 예약 내역을 저장할 배열
         };
     },
     methods: {
         getList() {
-            console.log("데이터 가져오기");
-
-            axios({
-                method: 'get', // put, post, delete                   
-                url: 'http://localhost:9000/api/movie',
-                headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
-                //params: guestbookVo, //get방식 파라미터로 값이 전달
-                //data: guestbookVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
-
-                responseType: 'json' //수신타입
-            }).then(response => {
-                console.log(response); //수신데이타
-
-            }).catch(error => {
-                console.log(error);
-            });
+            axios.get('http://localhost:9000/api/movie', {
+                params: {
+                    phoneNumber: this.phoneNumber
+                }
+            })
+                .then(response => {
+                    console.log(response.data);
+                    this.reservationList = response.data.apiData;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         },
         appendNumber(num) {
             if (this.phoneNumber.length < 11) {
@@ -101,12 +132,21 @@ export default {
         clearPhoneNumberMethod() {
             this.phoneNumber = ''; // 휴대폰 번호를 초기화합니다.
         },
+        goToFind() {
+            this.isModalViewed = true;
+            this.$router.push({
+                name: 'FindContentView',
+                query: { phoneNumber: this.phoneNumber }
+            })
+
+        }
     },
     created() {
         // 컴포넌트가 생성될 때 데이터를 가져오도록 설정
-        this.getList();
+
     }
 };
+
 </script>
 
-<style></style>
+
