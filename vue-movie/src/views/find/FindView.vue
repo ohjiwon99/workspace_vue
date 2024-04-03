@@ -14,18 +14,27 @@
                                         <tr>
                                             <th>예약번호</th>
                                             <th>영화 제목</th>
-                                            <th>상영일시</th>
+                                            <th>상영일자</th>
+                                            <th>상영시간</th>
                                             <th>상영관</th>
-                                            <th>좌석</th>
+                                            <th>좌석번호</th>
+                                            <th>영화가격</th>
+                                            <th>구매자이름</th>
+                                            <th>포인트</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr v-bind:key="i" v-for="(userVo, i) in reservationList">
-                                            <td>{{ userVo.mRemarks }}</td>
-                                            <td>{{ userVo.mName }}</td>
-                                            <td>{{ userVo.mDate }}</td>
-                                            <td>{{ userVo.mTheater }}</td>
-                                            <td>{{ userVo.sNo }}</td>
+                                            <td>{{ userVo.m_r_no }}</td>
+                                            <td>{{ userVo.m_name }}</td>
+                                            <td>{{ userVo.m_r_date }}</td>
+                                            <td>{{ userVo.s_date }}</td>
+                                            <td>1관</td>
+                                            <td>{{ userVo.m_s_no }}</td>
+                                            <td>{{ userVo.m_price }}</td>
+                                            <td>{{ userVo.user_name }}</td>
+                                            <td>{{ userVo.user_point }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -148,5 +157,3 @@ export default {
 };
 
 </script>
-
-
