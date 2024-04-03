@@ -27,13 +27,14 @@
         </div>
         <div class="point">
           <span>{{ user_name }} 님!</span><br>
+
           <!-- 사용 가능 포인트 정보를 받아와야 함 -->
-          <span>사용 가능 포인트: {{ user_point }}점</span>
+        <span>사용 가능 포인트: {{ user_point }}점</span>
         </div>
 
         <!-- 바코드 이미지 추가 -->
         <!-- 바코드 이미지 정보를 받아와야 함 -->
-        <img :src="barcodeImage" alt="바코드" class="barcode">
+        <img src="../assets/qrimages.png" alt="바코드" class="barcode">
       </div>
       
       <!-- 닫기 버튼 -->
@@ -56,8 +57,8 @@ export default {
     m_s_no: String,
     m_price: Number,
     user_name: String,
-    barcodeImage: String, // 바코드 이미지의 경로를 문자열로 받습니다.
-    user_point: Number // 사용 가능 포인트는 숫자로 표현됩니다.
+    barcodeImage: Image,
+    user_point: Number // 'int'를 'Number'로 수정
   },
   methods: {
     closeModal() {
