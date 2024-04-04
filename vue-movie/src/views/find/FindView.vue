@@ -43,7 +43,8 @@
                                             <td>{{ userVo.m_r_date }}</td>
                                             <td>{{ userVo.s_date }}</td>
                                             <td>1관</td>
-                                            <td>{{ userVo.m_s_no }}</td>
+                                            <td>D4 , D5</td>
+                                            <!--<td>{{ userVo.m_s_no }}</td>-->
                                             <td>{{ userVo.m_price }}</td>
                                             <td>{{ userVo.user_name }}</td>
                                             <td>{{ userVo.user_point }}</td>
@@ -68,7 +69,7 @@
 
 
                 <div id="input-container">
-                    <input type="text" v-model="phoneNumber" placeholder="010-0000-0000">
+                    <input type="text" v-model="phoneNumber" placeholder="01000000000">
                     <button id="search-button" @click="getList">핸드폰번호조회</button>
 
                 </div>
@@ -121,7 +122,7 @@ export default {
     },
     data() {
         return {
-            phoneNumber: '010-1234-5678',
+            phoneNumber: '',
             reservationList: [],
             reservationOnOff: false,
             

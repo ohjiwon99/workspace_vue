@@ -27,8 +27,9 @@
           </div>
 
           <div class="infoList">
+            <span>좌석번호 : D4 , D5</span>
             <!-- 상영관 정보를 받아와야 함 -->
-            <span>좌석번호 : {{ reservationList.m_s_no }}</span>
+            <!--<span>좌석번호 : {{ reservationList.m_s_no }}</span>-->
           </div>
 
           <div class="info">
