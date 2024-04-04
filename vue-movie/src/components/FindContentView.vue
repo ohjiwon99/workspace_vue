@@ -23,7 +23,8 @@
           </div>
 
           <div class="infoList">
-            {{ reservationList.m_r_date }}
+            {{ reservationList.m_r_date }} <br><br>
+            15:00 ~ 17:14
           </div>
 
           <div class="infoList">

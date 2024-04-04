@@ -41,7 +41,8 @@
                                             <td>{{ userVo.m_r_no }}</td>
                                             <td>{{ userVo.m_name }}</td>
                                             <td>{{ userVo.m_r_date }}</td>
-                                            <td>{{ userVo.s_date }}</td>
+                                            <td>15:00 ~ 17:14</td>
+                                            <!--<td>{{ userVo.s_date }}</td>-->
                                             <td>1관</td>
                                             <td>D4 , D5</td>
                                             <!--<td>{{ userVo.m_s_no }}</td>-->
@@ -94,7 +95,7 @@
                     <router-link to="/" id="return-button">돌아가기</router-link>
                 </div>
             </div>
-            <AppFooter />
+           
         </div>
 
     </div>
@@ -107,7 +108,7 @@
 <script>
 import "@/assets/css/FindView.css";
 import AppHeader from "@/components/AppHeader.vue";
-import AppFooter from "@/components/AppFooter.vue";
+
 import FindContentView from "@/components/FindContentView.vue";
 import ModalView from "@/components/ModalView.vue";
 import axios from 'axios';
@@ -116,7 +117,6 @@ export default {
     name: "FindView",
     components: {
         AppHeader,
-        AppFooter,
         FindContentView,
         ModalView,
     },

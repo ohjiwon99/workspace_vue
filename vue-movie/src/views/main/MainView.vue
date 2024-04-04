@@ -39,7 +39,7 @@
       </div>
       <!-- //container -->
 
-      <AppFooter />
+   
       <!-- //footer -->
     </div>
     <!-- //wrap -->
@@ -50,12 +50,12 @@
 import "@/assets/css/MainView.css"
 
 import AppHeader from "@/components/AppHeader.vue"
-import AppFooter from "@/components/AppFooter.vue"
+
 
 export default {
   name: "MainView",
   components: {
-      AppFooter,
+     
       AppHeader
   },
   data() {
