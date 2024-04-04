@@ -3,13 +3,18 @@
         <div id="wrap">
             <AppHeader />
             <div id="app">
-                <div class="content" v-if="isModalViewed">
+                <div class="content" v-if="reservationOnOff">
 
-                    <!-- 모달 창 -->
+                    <ModalView v-if="isModalViewed"  :is-open="isModalViewed" :selected-movie="selectedMovie" @close-modal="isModalViewed = false">
+                        <FindContentView v-bind:m_r_no="click_m_r_no"></FindContentView>
+                    </ModalView>
+
+                    <!-- 
                     <ModalView :is-open="isModalViewed" @close-modal="isModalViewed = false"
                         :selected-movie="selectedMovie">
                         <FindContentView></FindContentView>
                     </ModalView>
+                    -->
 
                     <!-- 예매 내역 조회 창 -->
                     <form action="" method="" enctype="multipart/form-data">
@@ -30,9 +35,19 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-bind:key="i" v-for="(userVo, i) in reservationList">
-
-                                            <td @click="openModal(userVo)">{{ userVo.m_r_no }}</td>
+                                        <tr v-bind:key="i" v-for="(userVo, i) in reservationList"
+                                            @click="openModal(userVo.m_r_no)">
+                                            <!--@click="openModal(userVo)-->
+                                            <td>{{ userVo.m_r_no }}</td>
+                                            <td>{{ userVo.m_name }}</td>
+                                            <td>{{ userVo.m_r_date }}</td>
+                                            <td>{{ userVo.s_date }}</td>
+                                            <td>1관</td>
+                                            <td>{{ userVo.m_s_no }}</td>
+                                            <td>{{ userVo.m_price }}</td>
+                                            <td>{{ userVo.user_name }}</td>
+                                            <td>{{ userVo.user_point }}</td>
+                                            <!-- <td @click="openModal(userVo)">{{ userVo.m_r_no }}</td>
                                             <td @click="openModal(userVo)">{{ userVo.m_name }}</td>
                                             <td @click="openModal(userVo)">{{ userVo.m_r_date }}</td>
                                             <td @click="openModal(userVo)">{{ userVo.s_date }}</td>
@@ -40,7 +55,7 @@
                                             <td @click="openModal(userVo)">{{ userVo.m_s_no }}</td>
                                             <td @click="openModal(userVo)">{{ userVo.m_price }}</td>
                                             <td @click="openModal(userVo)">{{ userVo.user_name }}</td>
-                                            <td @click="openModal(userVo)">{{ userVo.user_point }}</td>
+                                            <td @click="openModal(userVo)">{{ userVo.user_point }}</td> -->
                                         </tr>
                                     </tbody>
                                 </table>
@@ -48,9 +63,13 @@
                         </div>
                     </form>
                 </div>
+                <!-- //isModalViewed -->
+
+
+
                 <div id="input-container">
                     <input type="text" v-model="phoneNumber" placeholder="010-0000-0000">
-                    <button id="search-button" @click="openReservationList">핸드폰번호조회</button>
+                    <button id="search-button" @click="getList">핸드폰번호조회</button>
 
                 </div>
                 <div class="dial-container">
@@ -80,6 +99,8 @@
     </div>
 
 
+
+
 </template>
 
 <script>
@@ -87,6 +108,7 @@ import "@/assets/css/FindView.css";
 import AppHeader from "@/components/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
 import FindContentView from "@/components/FindContentView.vue";
+import ModalView from "@/components/ModalView.vue";
 import axios from 'axios';
 
 export default {
@@ -95,57 +117,95 @@ export default {
         AppHeader,
         AppFooter,
         FindContentView,
+        ModalView,
     },
     data() {
         return {
-            phoneNumber: '',
+            phoneNumber: '010-1234-5678',
             reservationList: [],
+            reservationOnOff: false,
+            
+            click_m_r_no: "",  //리스트에서 선택한 예약번호
+
+
+            
             isModalViewed: false,
-            selectedMovie: null,
+           
         };
+
+
     },
     methods: {
+        openModal(m_r_no) {
+            console.log("모달");
+            this.click_m_r_no = m_r_no;
 
-        openModal(selectedMovie) {
-            this.selectedMovie = selectedMovie; // 선택된 영화 정보를 설정
+
             this.isModalViewed = true; // 모달 창을 열기 위해 true로 설정
+
+
+           
+           
         },
 
         openReservationList() {
-            this.isModalViewed = true;
-            this.getList();
-        },
-        getList() {
+            //this.isModalViewed = true;
             axios({
                 method: 'get',
                 url: 'http://localhost:9000/api/movie',
                 params: { phoneNumber: this.phoneNumber },
                 responseType: 'json'
+
             }).then(response => {
                 console.log(response);
                 console.log(response.data);
                 this.reservationList = response.data.apiData;
+
             }).catch(error => {
                 console.log(error);
             });
         },
+
+        getList() {
+            console.log("getList()");
+            //this.isModalViewed = false;
+            axios({
+                method: 'get',
+                url: 'http://localhost:9000/api/movie',
+                params: { phoneNumber: this.phoneNumber },
+                responseType: 'json'
+
+            }).then(response => {
+                console.log(response);
+                console.log(response.data);
+                this.reservationList = response.data.apiData;
+                this.reservationOnOff = true;
+
+            }).catch(error => {
+                console.log(error);
+            });
+
+        },
+
         appendNumber(num) {
             if (this.phoneNumber.length < 11) {
                 this.phoneNumber += num;
             }
         },
+
         deleteLastDigit() {
             if (this.phoneNumber.length > 0) {
                 this.phoneNumber = this.phoneNumber.slice(0, -1);
             }
         },
+
         clearPhoneNumberMethod() {
             this.phoneNumber = '';
         },
     },
     created() {
-        // 컴포넌트가 생성될 때 데이터를 가져오도록 설정
-        this.getList(); // 핸드폰 번호 조회를 버튼 클릭 시에만 수행되도록 제거
+
+        //this.getList(); // 핸드폰 번호 조회를 버튼 클릭 시에만 수행되도록 제거
     }
 };
 </script>

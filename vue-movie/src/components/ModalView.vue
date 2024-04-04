@@ -1,16 +1,14 @@
 <template>
     <div class="modal">
         <div class="overlay" @click="$emit('close-modal')"></div>
-        <div class="modal-card">
-        <slot></slot>
+        <div class="">
+            <slot>  </slot>
         
         </div>
     </div>
 </template>
 
-
 <script>
-
 export default {
     name: "ModalView",
     components: {},
@@ -20,6 +18,3 @@ export default {
     methods: {},
 };
 </script>
-<style>
-
-</style>
