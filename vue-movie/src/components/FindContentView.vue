@@ -45,7 +45,7 @@
             <span>{{ reservationList.user_name }} 님!</span><br>
 
             <!-- 사용 가능 포인트 정보를 받아와야 함 -->
-            <span>사용 가능 포인트: {{ reservationList.user_point }}점</span>
+            <span>사용 가능 포인트: {{ reservationList.user_point }} P</span>
           </div>
 
           <!-- 바코드 이미지 추가 -->

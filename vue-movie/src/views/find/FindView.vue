@@ -48,7 +48,7 @@
                                             <!--<td>{{ userVo.m_s_no }}</td>-->
                                             <td>{{ userVo.m_price }}</td>
                                             <td>{{ userVo.user_name }}</td>
-                                            <td>{{ userVo.user_point }}</td>
+                                            <td>{{ userVo.user_point }} P</td>
                                             <!-- <td @click="openModal(userVo)">{{ userVo.m_r_no }}</td>
                                             <td @click="openModal(userVo)">{{ userVo.m_name }}</td>
                                             <td @click="openModal(userVo)">{{ userVo.m_r_date }}</td>
@@ -122,7 +122,7 @@ export default {
     },
     data() {
         return {
-            phoneNumber: '',
+            phoneNumber: '010',
             reservationList: [],
             reservationOnOff: false,
             
